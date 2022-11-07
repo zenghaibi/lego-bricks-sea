@@ -23,6 +23,7 @@ describe('LText.vue', () => {
     expect(wrapper.text()).toBe(msg);
     // should be default div tag
     expect(wrapper.element.tagName).toBe('DIV');
+
     // should have certian css attr
     const style = wrapper.attributes().style;
     console.log(style);
@@ -38,8 +39,10 @@ describe('LText.vue', () => {
       tag: 'h2',
     };
     const wrapper = shallowMount(LText, { props });
+    expect(wrapper.element.tagName).toBe('H2');
     await wrapper.trigger('click');
     expect(window.location.href).toBe('http://dummy.url');
+  
   });
   it('LText with isEditing should not trigger location href change', async () => {
     const props = {
