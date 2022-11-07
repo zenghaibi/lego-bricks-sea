@@ -6,12 +6,17 @@
   "module": "dist/lego-bricks-sea.esm.js",
   "types": "dist/index.d.ts",
   "author": "H.B Zeng",
+  "license": "MIT",
   "keywords": [
     "Component",
     "UI",
     "Vue3"
   ],
-  
+  "homepage": "https://gitee.com/fanno_linuxangel/lego-bricks-sea",
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/fanno_linuxangel/lego-bricks-sea"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npm run clean && npm run build:esm && npm run build:umd",
@@ -24,6 +29,9 @@
     "core-js": "^3.6.5",
     "lodash-es": "^4.17.20"
   },
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "vue": "^3.0.0"
   },
