@@ -67,6 +67,7 @@ export interface ImageComponentProps extends CommonComponentProps {
 export interface ShapeComponentProps extends CommonComponentProps {
   backgroundColor: string;
 }
+export type AllComponentProps = TextComponentProps & ImageComponentProps & ShapeComponentProps
 export const textDefaultProps: TextComponentProps = {
   // basic props - font styles
   text: '正文内容',
@@ -99,7 +100,7 @@ export const textStylePropNames = without(Object.keys(textDefaultProps), 'action
 export const imageStylePropsNames = without(Object.keys(imageDefaultProps), 'actionType', 'url', 'src')
 export const shapeStylePropsNames = without(Object.keys(imageDefaultProps), 'actionType', 'url')
 export const transformToComponentProps = <T extends {}>(props: T) => {
-  const mapProps = mapValues(props, (item) => {
+  const mapProps = mapValues(props, (item: any) => {
     return {
       type: (item as any).constructor as StringConstructor,
       default: item
