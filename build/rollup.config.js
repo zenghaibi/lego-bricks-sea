@@ -9,7 +9,9 @@ const overrides = {
   exclude: [
     "node_modules",
     "src/App.vue",
-    "src/main.ts"
+    "src/main.ts",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
   ]
 }
 const basicConfig = {

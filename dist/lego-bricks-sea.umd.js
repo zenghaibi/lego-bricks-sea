@@ -1,21 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue'), require('lodash-es')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'vue', 'lodash-es'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.LegoComponetns = {}, global.Vue, global._));
-})(this, (function (exports, vue, lodashEs) { 'use strict';
-
-  const useComponentCommon = (props, picks) => {
-      const styleProps = vue.computed(() => lodashEs.pick(props, picks));
-      const handleClick = () => {
-          if (props.actionType === 'url' && props.url && !props.isEditing) {
-              window.location.href = props.url;
-          }
-      };
-      return {
-          styleProps,
-          handleClick
-      };
-  };
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lodash-es'), require('vue')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'lodash-es', 'vue'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.LegoComponetns = {}, global._, global.Vue));
+})(this, (function (exports, lodashEs, vue) { 'use strict';
 
   const commonDefaultProps = {
       // actions
@@ -83,6 +70,19 @@
       return { ...mapProps, ...isEditingProp };
   };
 
+  const useComponentCommon = (props, picks) => {
+      const styleProps = vue.computed(() => lodashEs.pick(props, picks));
+      const handleClick = () => {
+          if (props.actionType === 'url' && props.url && !props.isEditing) {
+              window.location.href = props.url;
+          }
+      };
+      return {
+          styleProps,
+          handleClick
+      };
+  };
+
   const defaultProps$2 = transformToComponentProps(textDefaultProps);
   // array that contains style props
   var script$2 = vue.defineComponent({
@@ -105,20 +105,18 @@
       }
   });
 
-  const _withId$1 = /*#__PURE__*/vue.withScopeId("data-v-6bf95b7a");
-
-  const render$2 = /*#__PURE__*/_withId$1((_ctx, _cache, $props, $setup, $data, $options) => {
+  function render$2(_ctx, _cache, $props, $setup, $data, $options) {
     return (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.tag), {
-      style: _ctx.styleProps,
+      style: vue.normalizeStyle(_ctx.styleProps),
       class: "l-text-component",
       onClick: _ctx.handleClick
     }, {
-      default: _withId$1(() => [
+      default: vue.withCtx(() => [
         vue.createTextVNode(vue.toDisplayString(_ctx.text), 1 /* TEXT */)
       ]),
       _: 1 /* STABLE */
     }, 8 /* PROPS */, ["style", "onClick"]))
-  });
+  }
 
   script$2.render = render$2;
   script$2.__scopeId = "data-v-6bf95b7a";
@@ -146,16 +144,16 @@
       }
   });
 
-  const _withId = /*#__PURE__*/vue.withScopeId("data-v-1e970aa2");
+  const _hoisted_1 = ["src"];
 
-  const render$1 = /*#__PURE__*/_withId((_ctx, _cache, $props, $setup, $data, $options) => {
-    return (vue.openBlock(), vue.createBlock("img", {
-      style: _ctx.styleProps,
+  function render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    return (vue.openBlock(), vue.createElementBlock("img", {
+      style: vue.normalizeStyle(_ctx.styleProps),
       class: "l-image-component",
-      onClick: _cache[1] || (_cache[1] = vue.withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["prevent"])),
+      onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["prevent"])),
       src: _ctx.src
-    }, null, 12 /* STYLE, PROPS */, ["src"]))
-  });
+    }, null, 12 /* STYLE, PROPS */, _hoisted_1))
+  }
 
   script$1.render = render$1;
   script$1.__scopeId = "data-v-1e970aa2";
@@ -184,10 +182,10 @@
   });
 
   function render(_ctx, _cache, $props, $setup, $data, $options) {
-    return (vue.openBlock(), vue.createBlock("div", {
-      style: _ctx.styleProps,
+    return (vue.openBlock(), vue.createElementBlock("div", {
+      style: vue.normalizeStyle(_ctx.styleProps),
       class: "l-shape-component",
-      onClick: _cache[1] || (_cache[1] = vue.withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["prevent"]))
+      onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["prevent"]))
     }, null, 4 /* STYLE */))
   }
 
@@ -216,7 +214,13 @@
   exports.LShape = script;
   exports.LText = script$2;
   exports["default"] = index;
+  exports.imageDefaultProps = imageDefaultProps;
+  exports.imageStylePropsNames = imageStylePropsNames;
   exports.install = install;
+  exports.shapeDefaultProps = shapeDefaultProps;
+  exports.shapeStylePropsNames = shapeStylePropsNames;
+  exports.textDefaultProps = textDefaultProps;
+  exports.textStylePropNames = textStylePropNames;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

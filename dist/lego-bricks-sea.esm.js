@@ -1,18 +1,5 @@
-import { computed, defineComponent, openBlock, createBlock, resolveDynamicComponent, createTextVNode, toDisplayString, withScopeId, withModifiers } from 'vue';
-import { pick, without, mapValues } from 'lodash-es';
-
-const useComponentCommon = (props, picks) => {
-    const styleProps = computed(() => pick(props, picks));
-    const handleClick = () => {
-        if (props.actionType === 'url' && props.url && !props.isEditing) {
-            window.location.href = props.url;
-        }
-    };
-    return {
-        styleProps,
-        handleClick
-    };
-};
+import { without, mapValues, pick } from 'lodash-es';
+import { computed, defineComponent, openBlock, createBlock, resolveDynamicComponent, normalizeStyle, withCtx, createTextVNode, toDisplayString, createElementBlock, withModifiers } from 'vue';
 
 const commonDefaultProps = {
     // actions
@@ -80,6 +67,19 @@ const transformToComponentProps = (props) => {
     return { ...mapProps, ...isEditingProp };
 };
 
+const useComponentCommon = (props, picks) => {
+    const styleProps = computed(() => pick(props, picks));
+    const handleClick = () => {
+        if (props.actionType === 'url' && props.url && !props.isEditing) {
+            window.location.href = props.url;
+        }
+    };
+    return {
+        styleProps,
+        handleClick
+    };
+};
+
 const defaultProps$2 = transformToComponentProps(textDefaultProps);
 // array that contains style props
 var script$2 = defineComponent({
@@ -102,20 +102,18 @@ var script$2 = defineComponent({
     }
 });
 
-const _withId$1 = /*#__PURE__*/withScopeId("data-v-6bf95b7a");
-
-const render$2 = /*#__PURE__*/_withId$1((_ctx, _cache, $props, $setup, $data, $options) => {
+function render$2(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock(resolveDynamicComponent(_ctx.tag), {
-    style: _ctx.styleProps,
+    style: normalizeStyle(_ctx.styleProps),
     class: "l-text-component",
     onClick: _ctx.handleClick
   }, {
-    default: _withId$1(() => [
+    default: withCtx(() => [
       createTextVNode(toDisplayString(_ctx.text), 1 /* TEXT */)
     ]),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["style", "onClick"]))
-});
+}
 
 script$2.render = render$2;
 script$2.__scopeId = "data-v-6bf95b7a";
@@ -143,16 +141,16 @@ var script$1 = defineComponent({
     }
 });
 
-const _withId = /*#__PURE__*/withScopeId("data-v-1e970aa2");
+const _hoisted_1 = ["src"];
 
-const render$1 = /*#__PURE__*/_withId((_ctx, _cache, $props, $setup, $data, $options) => {
-  return (openBlock(), createBlock("img", {
-    style: _ctx.styleProps,
+function render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  return (openBlock(), createElementBlock("img", {
+    style: normalizeStyle(_ctx.styleProps),
     class: "l-image-component",
-    onClick: _cache[1] || (_cache[1] = withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["prevent"])),
+    onClick: _cache[0] || (_cache[0] = withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["prevent"])),
     src: _ctx.src
-  }, null, 12 /* STYLE, PROPS */, ["src"]))
-});
+  }, null, 12 /* STYLE, PROPS */, _hoisted_1))
+}
 
 script$1.render = render$1;
 script$1.__scopeId = "data-v-1e970aa2";
@@ -181,10 +179,10 @@ var script = defineComponent({
 });
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createBlock("div", {
-    style: _ctx.styleProps,
+  return (openBlock(), createElementBlock("div", {
+    style: normalizeStyle(_ctx.styleProps),
     class: "l-shape-component",
-    onClick: _cache[1] || (_cache[1] = withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["prevent"]))
+    onClick: _cache[0] || (_cache[0] = withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["prevent"]))
   }, null, 4 /* STYLE */))
 }
 
@@ -209,4 +207,4 @@ var index = {
     install
 };
 
-export { script$1 as LImage, script as LShape, script$2 as LText, index as default, install };
+export { script$1 as LImage, script as LShape, script$2 as LText, index as default, imageDefaultProps, imageStylePropsNames, install, shapeDefaultProps, shapeStylePropsNames, textDefaultProps, textStylePropNames };
