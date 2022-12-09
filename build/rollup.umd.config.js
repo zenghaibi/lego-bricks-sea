@@ -1,8 +1,8 @@
-const {  basicConfig, file } = require('./rollup.config')
-module.exports = {
+import basicConfig, { name, file } from './rollup.config'
+export default {
   ...basicConfig,
   output: {
-    name: 'LegoComponetns',
+    name,
     file: file('umd'),
     format: 'umd',
     globals: {
